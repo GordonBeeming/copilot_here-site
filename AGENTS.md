@@ -58,3 +58,12 @@ The site features testimonials and content derived from the following blog posts
 *   **Dev**: `npm run dev`
 *   **Build**: `npm run build` (Output: `dist/`)
 *   **Test**: `npx playwright test` (Generates `screenshot.png`)
+
+## Git & GPG Signing
+
+This repository is configured to require GPG signing for commits. However, the AI agent environment does not have access to the user's private GPG keys or 1Password integration.
+
+**Agent Instructions:**
+*   **DO NOT** disable `commit.gpgsign` in the git configuration.
+*   When making commits as the agent, use the `--no-gpg-sign` flag to bypass signing for that specific commit.
+*   Example: `git commit -m "Update files" --no-gpg-sign`
