@@ -244,7 +244,7 @@ function App() {
           <div className="container">
             <div className="flex flex-col md:flex-row items-center gap-12">
               <div className="flex-1">
-                <h2 className="text-3xl font-bold mb-6">Flexible Mounts & Configuration</h2>
+                <h2 className="text-3xl font-bold mb-6 text-center">Flexible Mounts & Configuration</h2>
                 <p className="text-lg text-[var(--text-secondary)] mb-6">
                   Need access to more than just the current directory? Securely mount additional paths with granular control.
                 </p>
@@ -289,10 +289,11 @@ function App() {
         </section>
 
         {/* How it works */}
-        <section className="container">
-          <div className="flex flex-col md:flex-row items-center gap-12">
-            <div className="flex-1">
-              <h2 className="text-3xl font-bold mb-6">How it works</h2>
+        <section className="py-16">
+          <div className="container">
+            <div className="flex flex-col md:flex-row items-center gap-12">
+              <div className="flex-1">
+                <h2 className="text-3xl font-bold mb-6 text-center">How it works</h2>
               <div className="space-y-6">
                 <div className="flex gap-4">
                   <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[var(--bg-tertiary)] flex items-center justify-center font-bold border border-[var(--border-color)]">1</div>
@@ -343,6 +344,7 @@ function App() {
                 ? Execute this command? (Y/n)
               </div>
             </div>
+          </div>
           </div>
         </section>
 
