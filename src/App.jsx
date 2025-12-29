@@ -6,7 +6,7 @@ function App() {
   const [copied, setCopied] = useState(false);
 
   const installCommandLinux = "curl -fsSL https://github.com/GordonBeeming/copilot_here/releases/download/cli-latest/copilot_here.sh -o ~/.copilot_here.sh && echo 'source ~/.copilot_here.sh' >> ~/.zshrc && source ~/.zshrc";
-  const installCommandWindows = "$scriptPath = \"$env:USERPROFILE\\Documents\\PowerShell\\copilot_here.ps1\"; New-Item -ItemType Directory -Force -Path (Split-Path $scriptPath) | Out-Null; Invoke-WebRequest -Uri \"https://github.com/GordonBeeming/copilot_here/releases/download/cli-latest/copilot_here.ps1\" -OutFile $scriptPath; if (-not (Test-Path $PROFILE)) { New-Item -ItemType File -Force -Path $PROFILE | Out-Null }; if (-not (Select-String -Path $PROFILE -Pattern \"copilot_here.ps1\" -Quiet -ErrorAction SilentlyContinue)) { Add-Content $PROFILE \"`n. $scriptPath\" }; . $PROFILE";
+  const installCommandWindows = "$scriptPath = \"$env:USERPROFILE\\.copilot_here.ps1\"; Invoke-WebRequest -Uri \"https://github.com/GordonBeeming/copilot_here/releases/download/cli-latest/copilot_here.ps1\" -OutFile $scriptPath; if (-not (Test-Path $PROFILE)) { New-Item -ItemType File -Force -Path $PROFILE | Out-Null }; if (-not (Select-String -Path $PROFILE -Pattern \"copilot_here.ps1\" -Quiet -ErrorAction SilentlyContinue)) { Add-Content $PROFILE \"`n. $scriptPath\" }; . $PROFILE";
 
   const [activeTab, setActiveTab] = useState('linux');
   const [installCommand, setInstallCommand] = useState(installCommandLinux);
