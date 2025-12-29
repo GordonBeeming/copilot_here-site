@@ -6,7 +6,7 @@ function App() {
   const [copied, setCopied] = useState(false);
 
   const installCommandLinux = "curl -fsSL https://github.com/GordonBeeming/copilot_here/releases/download/cli-latest/install.sh | bash";
-  const installCommandWindows = "iex (iwr -UseBasicParsing \"https://github.com/GordonBeeming/copilot_here/releases/download/cli-latest/install.ps1\").Content";
+  const installCommandWindows = "iex ([System.Text.Encoding]::UTF8.GetString((iwr -UseBasicParsing 'https://github.com/GordonBeeming/copilot_here/releases/download/cli-latest/install.ps1').Content))";
 
   const [activeTab, setActiveTab] = useState('linux');
   const [installCommand, setInstallCommand] = useState(installCommandLinux);
