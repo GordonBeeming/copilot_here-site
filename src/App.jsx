@@ -385,12 +385,9 @@ function App() {
         </section>
 
         {/* Supported Systems */}
-        <section className="bg-[var(--bg-primary)] border-b border-[var(--border-color)]">
+        <section className="bg-[var(--bg-secondary)] border-b border-[var(--border-color)]">
           <div className="container text-center">
             <h2 className="text-3xl font-bold mb-4">💻 Supported Systems</h2>
-            <p className="text-[var(--text-secondary)] mb-8 max-w-2xl mx-auto">
-              Designed to work across multiple platforms. "Tested" indicates systems personally verified by the maintainer.
-            </p>
             <div className="max-w-4xl mx-auto bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-lg overflow-hidden">
               <table className="w-full">
                 <thead className="bg-[var(--bg-primary)] border-b border-[var(--border-color)]">
@@ -464,7 +461,7 @@ function App() {
         </section>
 
         {/* Testimonials */}
-        <section className="bg-[var(--bg-secondary)] border-t border-[var(--border-color)]">
+        <section className="bg-[var(--bg-primary)] border-t border-[var(--border-color)]">
           <div className="container text-center">
             <h2 className="text-3xl font-bold mb-12">From the Blog</h2>
             <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
