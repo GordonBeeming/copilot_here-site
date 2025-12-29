@@ -449,7 +449,9 @@ function App() {
                     <td className="px-6 py-4 text-center">
                       <Check className="inline-block w-5 h-5 text-green-500" />
                     </td>
-                    <td className="px-6 py-4 text-center"></td>
+                    <td className="px-6 py-4 text-center">
+                      <Check className="inline-block w-5 h-5 text-green-500" />
+                    </td>
                   </tr>
                 </tbody>
               </table>
