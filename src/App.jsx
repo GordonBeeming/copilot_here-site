@@ -384,6 +384,85 @@ function App() {
           </div>
         </section>
 
+        {/* Supported Systems */}
+        <section className="bg-[var(--bg-primary)] border-b border-[var(--border-color)]">
+          <div className="container text-center">
+            <h2 className="text-3xl font-bold mb-4">💻 Supported Systems</h2>
+            <p className="text-[var(--text-secondary)] mb-8 max-w-2xl mx-auto">
+              Designed to work across multiple platforms. "Tested" indicates systems personally verified by the maintainer.
+            </p>
+            <div className="max-w-4xl mx-auto bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-lg overflow-hidden">
+              <table className="w-full">
+                <thead className="bg-[var(--bg-primary)] border-b border-[var(--border-color)]">
+                  <tr>
+                    <th className="px-6 py-3 text-left">Operating System</th>
+                    <th className="px-6 py-3 text-left">Shell</th>
+                    <th className="px-6 py-3 text-center">Supported</th>
+                    <th className="px-6 py-3 text-center">Tested</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-[var(--border-color)]">
+                  <tr>
+                    <td className="px-6 py-4 font-medium">macOS</td>
+                    <td className="px-6 py-4">Zsh</td>
+                    <td className="px-6 py-4 text-center">
+                      <Check className="inline-block w-5 h-5 text-green-500" />
+                    </td>
+                    <td className="px-6 py-4 text-center">
+                      <Check className="inline-block w-5 h-5 text-green-500" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-4 font-medium">macOS</td>
+                    <td className="px-6 py-4">Bash</td>
+                    <td className="px-6 py-4 text-center">
+                      <Check className="inline-block w-5 h-5 text-green-500" />
+                    </td>
+                    <td className="px-6 py-4 text-center"></td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-4 font-medium">Linux</td>
+                    <td className="px-6 py-4">Bash</td>
+                    <td className="px-6 py-4 text-center">
+                      <Check className="inline-block w-5 h-5 text-green-500" />
+                    </td>
+                    <td className="px-6 py-4 text-center"></td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-4 font-medium">Linux</td>
+                    <td className="px-6 py-4">Zsh</td>
+                    <td className="px-6 py-4 text-center">
+                      <Check className="inline-block w-5 h-5 text-green-500" />
+                    </td>
+                    <td className="px-6 py-4 text-center"></td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-4 font-medium">Windows 10/11</td>
+                    <td className="px-6 py-4">PowerShell 5.1</td>
+                    <td className="px-6 py-4 text-center">
+                      <Check className="inline-block w-5 h-5 text-green-500" />
+                    </td>
+                    <td className="px-6 py-4 text-center">
+                      <Check className="inline-block w-5 h-5 text-green-500" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-4 font-medium">Windows 10/11</td>
+                    <td className="px-6 py-4">PowerShell 7+</td>
+                    <td className="px-6 py-4 text-center">
+                      <Check className="inline-block w-5 h-5 text-green-500" />
+                    </td>
+                    <td className="px-6 py-4 text-center"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p className="text-sm text-[var(--text-secondary)] mt-6 max-w-3xl mx-auto">
+              <strong>Note:</strong> "Tested" represents systems personally tested. The tool likely works on other compatible systems too—if you successfully use it on an untested configuration, please let us know!
+            </p>
+          </div>
+        </section>
+
         {/* Testimonials */}
         <section className="bg-[var(--bg-secondary)] border-t border-[var(--border-color)]">
           <div className="container text-center">
