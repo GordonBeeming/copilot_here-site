@@ -5,8 +5,8 @@ import './App.css';
 function App() {
   const [copied, setCopied] = useState(false);
 
-  const installCommandLinux = "curl -fsSL https://github.com/GordonBeeming/copilot_here/releases/download/cli-latest/copilot_here.sh -o ~/.copilot_here.sh && echo 'source ~/.copilot_here.sh' >> ~/.zshrc && source ~/.zshrc";
-  const installCommandWindows = "$scriptPath = \"$env:USERPROFILE\\.copilot_here.ps1\"; Invoke-WebRequest -Uri \"https://github.com/GordonBeeming/copilot_here/releases/download/cli-latest/copilot_here.ps1\" -OutFile $scriptPath; if (-not (Test-Path $PROFILE)) { New-Item -ItemType File -Force -Path $PROFILE | Out-Null }; if (-not (Select-String -Path $PROFILE -Pattern \"copilot_here.ps1\" -Quiet -ErrorAction SilentlyContinue)) { Add-Content $PROFILE \"`n. $scriptPath\" }; . $PROFILE";
+  const installCommandLinux = "curl -fsSL https://github.com/GordonBeeming/copilot_here/releases/download/cli-latest/install.sh | bash";
+  const installCommandWindows = "iex (iwr -UseBasicParsing \"https://github.com/GordonBeeming/copilot_here/releases/download/cli-latest/install.ps1\").Content";
 
   const [activeTab, setActiveTab] = useState('linux');
   const [installCommand, setInstallCommand] = useState(installCommandLinux);
