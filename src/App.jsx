@@ -522,10 +522,14 @@ function App() {
           <p className="mb-4">
             Built with ❤️ by <ExternalLink href="https://github.com/GordonBeeming" className="text-[var(--accent-secondary)] hover:underline">Gordon Beeming</ExternalLink>
           </p>
-          <div className="flex justify-center gap-6">
+          <div className="flex justify-center gap-6 mb-4">
             <ExternalLink href="https://github.com/GordonBeeming/copilot_here" className="hover:text-white transition-colors">GitHub</ExternalLink>
             <ExternalLink href="https://gordonbeeming.com" className="hover:text-white transition-colors">Blog</ExternalLink>
             <ExternalLink href="https://github.com/features/copilot/cli" className="hover:text-white transition-colors">Copilot CLI</ExternalLink>
+          </div>
+          <div className="flex justify-center gap-4 text-sm">
+            <ExternalLink href="https://www.patreon.com/GordonBeeming" className="hover:text-[var(--accent-secondary)] transition-colors">Support on Patreon</ExternalLink>
+            <ExternalLink href="https://www.buymeacoffee.com/gordonbeeming" className="hover:text-[var(--accent-secondary)] transition-colors">Buy Me a Coffee</ExternalLink>
           </div>
         </div>
       </footer>
