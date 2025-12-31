@@ -81,7 +81,7 @@ function App() {
           <div className="container">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-tertiary)] border border-[var(--border-color)] text-sm mb-6">
               <span className="w-2 h-2 rounded-full bg-[var(--accent-primary)]"></span>
-              <span className="text-[var(--text-secondary)]">New: Airlock Network Isolation + Custom Docker Flags</span>
+              <span className="text-[var(--text-secondary)]">New: Native AOT CLI + Enhanced Windows Support</span>
             </div>
             
             <h1 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight">
@@ -90,7 +90,7 @@ function App() {
             </h1>
             
             <p className="text-xl text-[var(--text-secondary)] max-w-2xl mx-auto mb-10">
-              Run the GitHub Copilot CLI inside a secure Docker container. 
+              Run the <ExternalLink href="https://github.com/features/copilot/cli" className="text-[var(--accent-secondary)] hover:underline">GitHub Copilot CLI</ExternalLink> inside a secure Docker container. 
               Isolated from your system, authenticated with your existing credentials.
             </p>
 
@@ -158,7 +158,7 @@ function App() {
 
               <div className="card">
                 <div className="w-12 h-12 rounded-lg bg-[var(--bg-tertiary)] flex items-center justify-center mb-4 text-purple-400">
-                  <Cpu size={24} />
+                  <Lock size={24} />
                 </div>
                 <h3 className="text-xl font-bold mb-2">Network Airlock</h3>
                 <p className="text-[var(--text-secondary)]">
@@ -191,12 +191,11 @@ function App() {
 
               <div className="card">
                 <div className="w-12 h-12 rounded-lg bg-[var(--bg-tertiary)] flex items-center justify-center mb-4 text-[var(--accent-primary)]">
-                  <Lock size={24} />
+                  <Cpu size={24} />
                 </div>
-                <h3 className="text-xl font-bold mb-2">Auto-Authentication</h3>
+                <h3 className="text-xl font-bold mb-2">.NET Native AOT</h3>
                 <p className="text-[var(--text-secondary)]">
-                  Seamlessly uses your host machine's <code>gh</code> CLI credentials. 
-                  No need to re-login or manage separate tokens.
+                  Rebuilt as a native .NET 10 AOT binary for instant startup and rock-solid stability across all platforms.
                 </p>
               </div>
 
@@ -425,7 +424,9 @@ function App() {
                     <td className="px-6 py-4 text-center">
                       <Check className="inline-block w-5 h-5 text-green-500" />
                     </td>
-                    <td className="px-6 py-4 text-center"></td>
+                    <td className="px-6 py-4 text-center">
+                      <Check className="inline-block w-5 h-5 text-green-500" />
+                    </td>
                   </tr>
                   <tr>
                     <td className="px-6 py-4 font-medium">Linux</td>
@@ -464,11 +465,51 @@ function App() {
           </div>
         </section>
 
+        {/* Origin Story */}
+        <section className="bg-[var(--bg-primary)] border-b border-[var(--border-color)] py-16">
+          <div className="container">
+            <div className="max-w-4xl mx-auto text-center">
+              <h2 className="text-3xl font-bold mb-6">The "Paranoid" Origin Story</h2>
+              <p className="text-xl text-[var(--text-secondary)] mb-8">
+                This tool wasn't built to just run Copilot—it was built to <strong>tame</strong> it.
+              </p>
+              <p className="text-[var(--text-secondary)] mb-8 leading-relaxed">
+                As powerful as AI agents are, giving them unrestricted shell access is a security risk. 
+                <code>copilot_here</code> was born from a need to use these tools with confidence, 
+                wrapping them in a secure, ephemeral Docker container that protects your host system 
+                while still allowing the AI to be helpful.
+              </p>
+              <ExternalLink 
+                href="https://gordonbeeming.com/blog/2025-10-03/taming-the-ai-my-paranoid-guide-to-running-copilot-cli-in-a-secure-docker-sandbox"
+                className="btn btn-secondary inline-flex items-center gap-2"
+              >
+                <Shield size={18} />
+                Read: Taming the AI
+              </ExternalLink>
+            </div>
+          </div>
+        </section>
+
         {/* Testimonials */}
-        <section className="bg-[var(--bg-primary)] border-t border-[var(--border-color)]">
+        <section className="bg-[var(--bg-secondary)] border-t border-[var(--border-color)]">
           <div className="container text-center">
             <h2 className="text-3xl font-bold mb-12">From the Blog</h2>
             <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+              <blockquote className="bg-[var(--bg-primary)] p-6 rounded-lg border border-[var(--border-color)] text-left flex flex-col h-full">
+                <p className="text-lg mb-4 italic flex-grow">
+                  "December brings a massive architectural shift with a new Native AOT CLI binary... 
+                  and improved session context for AI agents."
+                </p>
+                <footer className="text-[var(--text-secondary)] mt-4">
+                  <ExternalLink 
+                    href="https://gordonbeeming.com/blog/2025-12-31/copilot_here-december-2025-updates-native-cli-stability-and-more"
+                    className="text-[var(--accent-secondary)] hover:underline"
+                  >
+                    — December Updates (Dec 2025)
+                  </ExternalLink>
+                </footer>
+              </blockquote>
+
               <blockquote className="bg-[var(--bg-primary)] p-6 rounded-lg border border-[var(--border-color)] text-left flex flex-col h-full">
                 <p className="text-lg mb-4 italic flex-grow">
                   "November 2025 is a massive release... Native ARM64 support for Apple Silicon, 
@@ -476,7 +517,7 @@ function App() {
                 </p>
                 <footer className="text-[var(--text-secondary)] mt-4">
                   <ExternalLink 
-                    href="https://gordonbeeming.com/blog/2025-11-28/copilot-cli-in-docker-november-2025-updates-arm64-dotnet-10-and-flexible-mounts"
+                    href="https://gordonbeeming.com/blog/2025-11-28/copilot_here-november-2025-updates-arm64-dotnet-10-and-flexible-mounts"
                     className="text-[var(--accent-secondary)] hover:underline"
                   >
                     — November Updates (Nov 2025)
@@ -491,25 +532,10 @@ function App() {
                 </p>
                 <footer className="text-[var(--text-secondary)] mt-4">
                   <ExternalLink 
-                    href="https://gordonbeeming.com/blog/2025-10-28/copilot-cli-in-docker-october-2025-updates-auto-updates-cross-platform-support-and-more"
+                    href="https://gordonbeeming.com/blog/2025-10-28/copilot_here-october-2025-updates-auto-updates-cross-platform-support-and-more"
                     className="text-[var(--accent-secondary)] hover:underline"
                   >
                     — October Updates (Oct 2025)
-                  </ExternalLink>
-                </footer>
-              </blockquote>
-
-              <blockquote className="bg-[var(--bg-primary)] p-6 rounded-lg border border-[var(--border-color)] text-left flex flex-col h-full">
-                <p className="text-lg mb-4 italic flex-grow">
-                  "I wanted the power of Copilot without giving it the keys to my entire kingdom. 
-                  The goal was to use powerful features like --allow-all-tools with more confidence."
-                </p>
-                <footer className="text-[var(--text-secondary)] mt-4">
-                  <ExternalLink 
-                    href="https://gordonbeeming.com/blog/2025-10-03/taming-the-ai-my-paranoid-guide-to-running-copilot-cli-in-a-secure-docker-sandbox"
-                    className="text-[var(--accent-secondary)] hover:underline"
-                  >
-                    — Taming the AI (Oct 2025)
                   </ExternalLink>
                 </footer>
               </blockquote>
@@ -521,17 +547,19 @@ function App() {
       {/* Footer */}
       <footer className="py-8 border-t border-[var(--border-color)] text-center text-[var(--text-secondary)]">
         <div className="container">
-          <p className="mb-4">
-            Built with ❤️ by <ExternalLink href="https://github.com/GordonBeeming" className="text-[var(--accent-secondary)] hover:underline">Gordon Beeming</ExternalLink>
+          <p className="mb-4 flex flex-col md:flex-row items-center justify-center gap-2">
+            <span>Built with ❤️ by <ExternalLink href="https://github.com/GordonBeeming" className="text-[var(--accent-secondary)] hover:underline">Gordon Beeming</ExternalLink></span>
+            <span className="hidden md:inline text-[var(--text-secondary)]">•</span>
+            <div className="flex gap-4 text-sm items-center">
+              <ExternalLink href="https://www.patreon.com/GordonBeeming" className="hover:text-[var(--accent-secondary)] transition-colors">Support on Patreon</ExternalLink>
+              <span className="text-[var(--text-secondary)]">•</span>
+              <ExternalLink href="https://www.buymeacoffee.com/gordonbeeming" className="hover:text-[var(--accent-secondary)] transition-colors">Buy Me a Coffee</ExternalLink>
+            </div>
           </p>
           <div className="flex justify-center gap-6 mb-4">
             <ExternalLink href="https://github.com/GordonBeeming/copilot_here" className="hover:text-white transition-colors">GitHub</ExternalLink>
             <ExternalLink href="https://gordonbeeming.com" className="hover:text-white transition-colors">Blog</ExternalLink>
-            <ExternalLink href="https://github.com/features/copilot/cli" className="hover:text-white transition-colors">Copilot CLI</ExternalLink>
-          </div>
-          <div className="flex justify-center gap-4 text-sm">
-            <ExternalLink href="https://www.patreon.com/GordonBeeming" className="hover:text-[var(--accent-secondary)] transition-colors">Support on Patreon</ExternalLink>
-            <ExternalLink href="https://www.buymeacoffee.com/gordonbeeming" className="hover:text-[var(--accent-secondary)] transition-colors">Buy Me a Coffee</ExternalLink>
+            <ExternalLink href="https://github.com/features/copilot/cli" className="hover:text-white transition-colors">GitHub Copilot CLI</ExternalLink>
           </div>
         </div>
       </footer>
