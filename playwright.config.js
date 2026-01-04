@@ -9,6 +9,6 @@ export default defineConfig({
     timeout: 120 * 1000,
   },
   use: {
-    baseURL: 'http://localhost:4173',
+    baseURL: 'http://localhost:4173/copilot_here/',
   },
 });
