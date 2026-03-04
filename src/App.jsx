@@ -139,10 +139,10 @@ function App() {
                   <div className="code-block text-sm flex items-start justify-between">
                     <div>
                       <div className="text-[var(--text-secondary)] mb-1 text-xs font-semibold">Homebrew</div>
-                      <code className="text-[var(--accent-secondary)] text-xs">brew tap gordonbeeming/tap<br />brew install copilot_here</code>
+                      <code className="text-[var(--accent-secondary)] text-xs">brew tap gordonbeeming/tap<br />brew install --cask copilot-here</code>
                     </div>
                     <button
-                      onClick={() => copyPkgCommand('brew', 'brew tap gordonbeeming/tap && brew install copilot_here')}
+                      onClick={() => copyPkgCommand('brew', 'brew tap gordonbeeming/tap && brew install --cask copilot-here')}
                       className="text-[var(--text-secondary)] hover:text-white transition-colors p-1 flex-shrink-0"
                       title="Copy to clipboard"
                     >
