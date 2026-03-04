@@ -81,7 +81,7 @@ function App() {
           <div className="container">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-tertiary)] border border-[var(--border-color)] text-sm mb-6">
               <span className="w-2 h-2 rounded-full bg-[var(--accent-primary)]"></span>
-              <span className="text-[var(--text-secondary)]">New: Native AOT CLI + Enhanced Windows Support</span>
+              <span className="text-[var(--text-secondary)]">New: Install via Homebrew, WinGet & NuGet</span>
             </div>
             
             <h1 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight">
@@ -125,6 +125,24 @@ function App() {
               <p className="text-xs text-[var(--text-secondary)] mt-2 text-center">
                 Works on Linux, macOS (Intel/Apple Silicon), and Windows (WSL/PowerShell)
               </p>
+
+              <div className="mt-6">
+                <p className="text-sm text-[var(--text-secondary)] mb-3 font-semibold">Or install via package managers:</p>
+                <div className="grid md:grid-cols-3 gap-3 text-left">
+                  <div className="code-block text-sm">
+                    <div className="text-[var(--text-secondary)] mb-1 text-xs font-semibold">Homebrew</div>
+                    <code className="text-[var(--accent-secondary)] text-xs">brew tap gordonbeeming/tap<br />brew install copilot_here</code>
+                  </div>
+                  <div className="code-block text-sm">
+                    <div className="text-[var(--text-secondary)] mb-1 text-xs font-semibold">WinGet</div>
+                    <code className="text-[var(--accent-secondary)] text-xs">winget install GordonBeeming.CopilotHere</code>
+                  </div>
+                  <div className="code-block text-sm">
+                    <div className="text-[var(--text-secondary)] mb-1 text-xs font-semibold">NuGet (.NET)</div>
+                    <code className="text-[var(--accent-secondary)] text-xs">dotnet tool install -g copilot_here</code>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div className="flex flex-wrap justify-center gap-4">
@@ -205,8 +223,41 @@ function App() {
                 </div>
                 <h3 className="text-xl font-bold mb-2">Cross-Platform</h3>
                 <p className="text-[var(--text-secondary)]">
-                  Consistent experience across Linux, macOS, and Windows. 
+                  Consistent experience across Linux, macOS, and Windows.
                   Includes PowerShell Core integration for cross-platform scripting.
+                </p>
+              </div>
+
+              <div className="card">
+                <div className="w-12 h-12 rounded-lg bg-[var(--bg-tertiary)] flex items-center justify-center mb-4 text-cyan-400">
+                  <Box size={24} />
+                </div>
+                <h3 className="text-xl font-bold mb-2">Container Runtimes</h3>
+                <p className="text-[var(--text-secondary)]">
+                  Works with Docker, Podman, and OrbStack. Auto-detects your available runtime
+                  or configure your preferred one per-project.
+                </p>
+              </div>
+
+              <div className="card">
+                <div className="w-12 h-12 rounded-lg bg-[var(--bg-tertiary)] flex items-center justify-center mb-4 text-indigo-400">
+                  <Settings size={24} />
+                </div>
+                <h3 className="text-xl font-bold mb-2">Model Configuration</h3>
+                <p className="text-[var(--text-secondary)]">
+                  Set your preferred AI model per-project or globally.
+                  No more passing <code>--model</code> every time.
+                </p>
+              </div>
+
+              <div className="card">
+                <div className="w-12 h-12 rounded-lg bg-[var(--bg-tertiary)] flex items-center justify-center mb-4 text-orange-400">
+                  <Globe size={24} />
+                </div>
+                <h3 className="text-xl font-bold mb-2">Install Anywhere</h3>
+                <p className="text-[var(--text-secondary)]">
+                  Install via Homebrew, WinGet, or NuGet — or use the classic
+                  curl/PowerShell scripts. Your choice.
                 </p>
               </div>
             </div>
@@ -219,7 +270,7 @@ function App() {
             <h2 className="text-3xl font-bold text-center mb-12">Available Images</h2>
             
             {/* Primary Images */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
               <div className="card bg-[var(--bg-tertiary)] border-2 border-[var(--accent-secondary)]">
                 <h3 className="text-xl font-bold mb-2 text-white">Base</h3>
                 <code className="text-sm block mb-3 text-[var(--accent-secondary)]">latest</code>
@@ -246,6 +297,13 @@ function App() {
                 <code className="text-sm block mb-3 text-[var(--accent-secondary)]">rust</code>
                 <p className="text-sm text-[var(--text-secondary)]">
                   Rust toolchain with cargo & rustc
+                </p>
+              </div>
+              <div className="card bg-[var(--bg-tertiary)] border-2 border-cyan-400">
+                <h3 className="text-xl font-bold mb-2 text-white">Golang</h3>
+                <code className="text-sm block mb-3 text-[var(--accent-secondary)]">golang</code>
+                <p className="text-sm text-[var(--text-secondary)]">
+                  Go toolchain with go & gofmt
                 </p>
               </div>
             </div>
@@ -494,14 +552,29 @@ function App() {
         <section className="bg-[var(--bg-secondary)] border-t border-[var(--border-color)]">
           <div className="container text-center">
             <h2 className="text-3xl font-bold mb-12">From the Blog</h2>
-            <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
               <blockquote className="bg-[var(--bg-primary)] p-6 rounded-lg border border-[var(--border-color)] text-left flex flex-col h-full">
                 <p className="text-lg mb-4 italic flex-grow">
-                  "December brings a massive architectural shift with a new Native AOT CLI binary... 
+                  "Q1 2026 brings copilot_here to your favorite package managers, adds Golang support,
+                  enables Podman and OrbStack as container runtimes, and introduces model configuration."
+                </p>
+                <footer className="text-[var(--text-secondary)] mt-4">
+                  <ExternalLink
+                    href="https://gordonbeeming.com/blog/2026-03-04/copilot_here-q1-2026-updates-package-managers-golang-podman-and-more"
+                    className="text-[var(--accent-secondary)] hover:underline"
+                  >
+                    — Q1 2026 Updates (Mar 2026)
+                  </ExternalLink>
+                </footer>
+              </blockquote>
+
+              <blockquote className="bg-[var(--bg-primary)] p-6 rounded-lg border border-[var(--border-color)] text-left flex flex-col h-full">
+                <p className="text-lg mb-4 italic flex-grow">
+                  "December brings a massive architectural shift with a new Native AOT CLI binary...
                   and improved session context for AI agents."
                 </p>
                 <footer className="text-[var(--text-secondary)] mt-4">
-                  <ExternalLink 
+                  <ExternalLink
                     href="https://gordonbeeming.com/blog/2025-12-31/copilot_here-december-2025-updates-native-cli-stability-and-more"
                     className="text-[var(--accent-secondary)] hover:underline"
                   >
@@ -512,11 +585,11 @@ function App() {
 
               <blockquote className="bg-[var(--bg-primary)] p-6 rounded-lg border border-[var(--border-color)] text-left flex flex-col h-full">
                 <p className="text-lg mb-4 italic flex-grow">
-                  "November 2025 is a massive release... Native ARM64 support for Apple Silicon, 
+                  "November 2025 is a massive release... Native ARM64 support for Apple Silicon,
                   .NET 10 SDKs, PowerShell Core integration, plus the game-changing Airlock network isolation feature."
                 </p>
                 <footer className="text-[var(--text-secondary)] mt-4">
-                  <ExternalLink 
+                  <ExternalLink
                     href="https://gordonbeeming.com/blog/2025-11-28/copilot_here-november-2025-updates-arm64-dotnet-10-and-flexible-mounts"
                     className="text-[var(--accent-secondary)] hover:underline"
                   >
@@ -527,11 +600,11 @@ function App() {
 
               <blockquote className="bg-[var(--bg-primary)] p-6 rounded-lg border border-[var(--border-color)] text-left flex flex-col h-full">
                 <p className="text-lg mb-4 italic flex-grow">
-                  "October 2025 brought a wave of improvements... Auto-Updating Scripts, Quick Install Method, 
+                  "October 2025 brought a wave of improvements... Auto-Updating Scripts, Quick Install Method,
                   and Argument Pass-Through for native Copilot features."
                 </p>
                 <footer className="text-[var(--text-secondary)] mt-4">
-                  <ExternalLink 
+                  <ExternalLink
                     href="https://gordonbeeming.com/blog/2025-10-28/copilot_here-october-2025-updates-auto-updates-cross-platform-support-and-more"
                     className="text-[var(--accent-secondary)] hover:underline"
                   >
