@@ -4,6 +4,7 @@ import './App.css';
 
 function App() {
   const [copied, setCopied] = useState(false);
+  const [copiedPkg, setCopiedPkg] = useState(null);
 
   const installCommandLinux = "curl -fsSL https://github.com/GordonBeeming/copilot_here/releases/download/cli-latest/install.sh | $SHELL";
   const installCommandWindows = "iex ([System.Text.Encoding]::UTF8.GetString((iwr -UseBasicParsing 'https://github.com/GordonBeeming/copilot_here/releases/download/cli-latest/install.ps1').Content))";
@@ -27,6 +28,12 @@ function App() {
     navigator.clipboard.writeText(installCommand);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const copyPkgCommand = (key, command) => {
+    navigator.clipboard.writeText(command);
+    setCopiedPkg(key);
+    setTimeout(() => setCopiedPkg(null), 2000);
   };
 
   const ExternalLink = ({ href, children, className }) => {
@@ -81,7 +88,7 @@ function App() {
           <div className="container">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-tertiary)] border border-[var(--border-color)] text-sm mb-6">
               <span className="w-2 h-2 rounded-full bg-[var(--accent-primary)]"></span>
-              <span className="text-[var(--text-secondary)]">New: Install via Homebrew, WinGet & NuGet</span>
+              <span className="text-[var(--text-secondary)]">New: Install via Homebrew, WinGet & .NET Tool</span>
             </div>
             
             <h1 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight">
@@ -129,17 +136,44 @@ function App() {
               <div className="mt-6">
                 <p className="text-sm text-[var(--text-secondary)] mb-3 font-semibold">Or install via package managers:</p>
                 <div className="grid md:grid-cols-3 gap-3 text-left">
-                  <div className="code-block text-sm">
-                    <div className="text-[var(--text-secondary)] mb-1 text-xs font-semibold">Homebrew</div>
-                    <code className="text-[var(--accent-secondary)] text-xs">brew tap gordonbeeming/tap<br />brew install copilot_here</code>
+                  <div className="code-block text-sm flex items-start justify-between">
+                    <div>
+                      <div className="text-[var(--text-secondary)] mb-1 text-xs font-semibold">Homebrew</div>
+                      <code className="text-[var(--accent-secondary)] text-xs">brew tap gordonbeeming/tap<br />brew install copilot_here</code>
+                    </div>
+                    <button
+                      onClick={() => copyPkgCommand('brew', 'brew tap gordonbeeming/tap && brew install copilot_here')}
+                      className="text-[var(--text-secondary)] hover:text-white transition-colors p-1 flex-shrink-0"
+                      title="Copy to clipboard"
+                    >
+                      {copiedPkg === 'brew' ? <Check size={16} className="text-[var(--accent-primary)]" /> : <Copy size={16} />}
+                    </button>
                   </div>
-                  <div className="code-block text-sm">
-                    <div className="text-[var(--text-secondary)] mb-1 text-xs font-semibold">WinGet</div>
-                    <code className="text-[var(--accent-secondary)] text-xs">winget install GordonBeeming.CopilotHere</code>
+                  <div className="code-block text-sm flex items-start justify-between">
+                    <div>
+                      <div className="text-[var(--text-secondary)] mb-1 text-xs font-semibold">WinGet</div>
+                      <code className="text-[var(--accent-secondary)] text-xs">winget install GordonBeeming.CopilotHere</code>
+                    </div>
+                    <button
+                      onClick={() => copyPkgCommand('winget', 'winget install GordonBeeming.CopilotHere')}
+                      className="text-[var(--text-secondary)] hover:text-white transition-colors p-1 flex-shrink-0"
+                      title="Copy to clipboard"
+                    >
+                      {copiedPkg === 'winget' ? <Check size={16} className="text-[var(--accent-primary)]" /> : <Copy size={16} />}
+                    </button>
                   </div>
-                  <div className="code-block text-sm">
-                    <div className="text-[var(--text-secondary)] mb-1 text-xs font-semibold">NuGet (.NET)</div>
-                    <code className="text-[var(--accent-secondary)] text-xs">dotnet tool install -g copilot_here</code>
+                  <div className="code-block text-sm flex items-start justify-between">
+                    <div>
+                      <div className="text-[var(--text-secondary)] mb-1 text-xs font-semibold">.NET Tool</div>
+                      <code className="text-[var(--accent-secondary)] text-xs">dotnet tool install -g copilot_here</code>
+                    </div>
+                    <button
+                      onClick={() => copyPkgCommand('nuget', 'dotnet tool install -g copilot_here')}
+                      className="text-[var(--text-secondary)] hover:text-white transition-colors p-1 flex-shrink-0"
+                      title="Copy to clipboard"
+                    >
+                      {copiedPkg === 'nuget' ? <Check size={16} className="text-[var(--accent-primary)]" /> : <Copy size={16} />}
+                    </button>
                   </div>
                 </div>
               </div>
@@ -256,7 +290,7 @@ function App() {
                 </div>
                 <h3 className="text-xl font-bold mb-2">Install Anywhere</h3>
                 <p className="text-[var(--text-secondary)]">
-                  Install via Homebrew, WinGet, or NuGet — or use the classic
+                  Install via Homebrew, WinGet, or as a .NET tool — or use the classic
                   curl/PowerShell scripts. Your choice.
                 </p>
               </div>
