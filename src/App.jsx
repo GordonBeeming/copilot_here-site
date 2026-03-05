@@ -95,7 +95,7 @@ function App() {
           </div>
           <div className="flex items-center gap-3">
             <ExternalLink
-              href="https://github.com/GordonBeeming/copilot_here/stargazers"
+              href="https://github.com/GordonBeeming/copilot_here"
               className="inline-flex items-center gap-1.5 rounded-lg border border-gray-600 px-3 py-1.5 text-sm font-medium text-gray-300 hover:bg-gray-800 transition-colors"
               aria-label={`Star copilot_here on GitHub${stars !== null ? ` — ${stars} stars` : ''}`}
             >
