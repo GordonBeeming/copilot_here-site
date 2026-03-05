@@ -1,10 +1,42 @@
-import { useState } from 'react';
-import { Terminal, Shield, Zap, Globe, Copy, Check, Github, Box, Lock, Cpu, Settings } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Terminal, Shield, Zap, Globe, Copy, Check, Github, Box, Lock, Cpu, Settings, Star } from 'lucide-react';
 import './App.css';
+
+const GITHUB_REPO = 'GordonBeeming/copilot_here';
+const STARS_CACHE_KEY = 'copilot_here_gh_stars';
+const STARS_CACHE_TTL = 60 * 60 * 1000; // 1 hour
+
+function useGitHubStars(repo) {
+  const [stars, setStars] = useState(null);
+
+  useEffect(() => {
+    const cached = localStorage.getItem(STARS_CACHE_KEY);
+    if (cached) {
+      const { count, ts } = JSON.parse(cached);
+      if (Date.now() - ts < STARS_CACHE_TTL) {
+        setStars(count);
+        return;
+      }
+    }
+
+    fetch(`https://api.github.com/repos/${repo}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (typeof data.stargazers_count === 'number') {
+          setStars(data.stargazers_count);
+          localStorage.setItem(STARS_CACHE_KEY, JSON.stringify({ count: data.stargazers_count, ts: Date.now() }));
+        }
+      })
+      .catch(() => {});
+  }, [repo]);
+
+  return stars;
+}
 
 function App() {
   const [copied, setCopied] = useState(false);
   const [copiedPkg, setCopiedPkg] = useState(null);
+  const stars = useGitHubStars(GITHUB_REPO);
 
   const installCommandLinux = "curl -fsSL https://github.com/GordonBeeming/copilot_here/releases/download/cli-latest/install.sh | $SHELL";
   const installCommandWindows = "iex ([System.Text.Encoding]::UTF8.GetString((iwr -UseBasicParsing 'https://github.com/GordonBeeming/copilot_here/releases/download/cli-latest/install.ps1').Content))";
@@ -62,15 +94,18 @@ function App() {
             <span>copilot_here</span>
           </div>
           <div className="flex items-center gap-3">
-            <ExternalLink 
-              href="https://github.com/GordonBeeming/copilot_here/stargazers" 
-              className="hover:opacity-80 transition-opacity"
+            <ExternalLink
+              href="https://github.com/GordonBeeming/copilot_here/stargazers"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-gray-600 px-3 py-1.5 text-sm font-medium text-gray-300 hover:bg-gray-800 transition-colors"
+              aria-label={`Star copilot_here on GitHub${stars !== null ? ` — ${stars} stars` : ''}`}
             >
-              <img 
-                src="https://img.shields.io/github/stars/GordonBeeming/copilot_here?style=social" 
-                alt="GitHub Stars"
-                className="h-6"
-              />
+              <Github size={16} />
+              <Star size={14} />
+              {stars !== null ? (
+                <span>{stars}</span>
+              ) : (
+                <span className="inline-block h-4 w-6 animate-pulse rounded bg-gray-700" />
+              )}
             </ExternalLink>
             <ExternalLink 
               href="https://github.com/GordonBeeming/copilot_here" 
