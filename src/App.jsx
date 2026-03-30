@@ -339,7 +339,7 @@ function App() {
             <h2 className="text-3xl font-bold text-center mb-12">Available Images</h2>
             
             {/* Primary Images */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-6 gap-6 mb-8">
               <div className="card bg-[var(--bg-tertiary)] border-2 border-[var(--accent-secondary)]">
                 <h3 className="text-xl font-bold mb-2 text-white">Base</h3>
                 <code className="text-sm block mb-3 text-[var(--accent-secondary)]">latest</code>
@@ -375,6 +375,13 @@ function App() {
                   Go toolchain with go & gofmt
                 </p>
               </div>
+              <div className="card bg-[var(--bg-tertiary)] border-2 border-red-400">
+                <h3 className="text-xl font-bold mb-2 text-white">Java</h3>
+                <code className="text-sm block mb-3 text-[var(--accent-secondary)]">java</code>
+                <p className="text-sm text-[var(--text-secondary)]">
+                  JDK 21, Maven & Gradle
+                </p>
+              </div>
             </div>
 
             {/* Compound Images */}
@@ -392,9 +399,9 @@ function App() {
                 <p className="text-xs text-[var(--text-secondary)]">All .NET SDKs + Rust toolchain</p>
               </div>
               <div className="p-4 bg-[var(--bg-secondary)] rounded-lg border border-[var(--border-color)] hover:border-[var(--accent-secondary)] transition-colors">
-                <div className="text-sm font-semibold mb-2 text-white">Need something else?</div>
+                <div className="text-sm font-semibold mb-2 text-white">Bring Your Own Image</div>
                 <p className="text-xs text-[var(--text-secondary)]">
-                  Have a different toolchain combination? <ExternalLink href="https://github.com/GordonBeeming/copilot_here" className="text-[var(--accent-secondary)] hover:underline">Send us a PR</ExternalLink> to add a new variant!
+                  Use <code>--image &lt;name&gt;</code> to run with any custom Docker image, or <ExternalLink href="https://github.com/GordonBeeming/copilot_here" className="text-[var(--accent-secondary)] hover:underline">send us a PR</ExternalLink> to add a new variant!
                 </p>
               </div>
             </div>
