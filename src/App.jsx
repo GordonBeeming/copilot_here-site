@@ -379,7 +379,7 @@ function App() {
                 <h3 className="text-xl font-bold mb-2 text-white">Java</h3>
                 <code className="text-sm block mb-3 text-[var(--accent-secondary)]">java</code>
                 <p className="text-sm text-[var(--text-secondary)]">
-                  JDK 21, Maven & Gradle
+                  JDK 21, Maven, Gradle & PlantUML
                 </p>
               </div>
             </div>
