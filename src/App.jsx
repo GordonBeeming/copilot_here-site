@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Terminal, Shield, Zap, Globe, Copy, Check, Github, Box, Lock, Cpu, Settings, Star } from 'lucide-react';
+import { Terminal, Shield, Zap, Globe, Copy, Check, Github, Box, Lock, Cpu, Settings, Star, AlertTriangle, Network, X } from 'lucide-react';
 import './App.css';
 
 const GITHUB_REPO = 'GordonBeeming/copilot_here';
@@ -329,6 +329,18 @@ function App() {
                   curl/PowerShell scripts. Your choice.
                 </p>
               </div>
+
+              <div className="card">
+                <div className="w-12 h-12 rounded-lg bg-[var(--bg-tertiary)] flex items-center justify-center mb-4 text-rose-400">
+                  <Network size={24} />
+                </div>
+                <h3 className="text-xl font-bold mb-2">DinD via Brokered Socket</h3>
+                <p className="text-[var(--text-secondary)]">
+                  Docker-in-Docker without the risk. An API broker intercepts every Docker call,
+                  enforces an image allowlist, and blocks dangerous container configurations.
+                  <a href="#docker-broker" className="text-[var(--accent-secondary)] hover:underline ml-1">Learn more</a>
+                </p>
+              </div>
             </div>
           </div>
         </section>
@@ -379,7 +391,7 @@ function App() {
                 <h3 className="text-xl font-bold mb-2 text-white">Java</h3>
                 <code className="text-sm block mb-3 text-[var(--accent-secondary)]">java</code>
                 <p className="text-sm text-[var(--text-secondary)]">
-                  JDK 21, Maven, Gradle & PlantUML
+                  JDK 25, Maven, Gradle & PlantUML
                 </p>
               </div>
             </div>
@@ -514,6 +526,164 @@ function App() {
               </div>
             </div>
           </div>
+          </div>
+        </section>
+
+        {/* DinD via Brokered Docker Socket */}
+        <section id="docker-broker" className="bg-[var(--bg-secondary)] border-b border-[var(--border-color)]">
+          <div className="container">
+            <div className="text-center mb-12">
+              <span className="inline-block bg-[var(--bg-tertiary)] text-[var(--accent-secondary)] text-sm font-medium px-3 py-1 rounded-full border border-[var(--border-color)] mb-4">
+                BETA
+              </span>
+              <h2 className="text-3xl font-bold mb-4">DinD via Brokered Docker Socket</h2>
+              <p className="text-[var(--text-secondary)] max-w-2xl mx-auto">
+                Docker-in-Docker without giving away the keys. Your AI agent gets Docker access, but every API call goes through a host-side broker that decides what's allowed.
+              </p>
+            </div>
+
+            {/* How it works + quick setup */}
+            <div className="flex flex-col md:flex-row gap-12 mb-16">
+              <div className="flex-1">
+                <h3 className="text-xl font-bold mb-4">The problem with raw socket mounts</h3>
+                <p className="text-[var(--text-secondary)] mb-4">
+                  AI agents need Docker access for integration tests, builds, and sidecars. The usual answer is mounting <code>/var/run/docker.sock</code> directly, but that gives unrestricted access to the host Docker daemon. Any image, privileged containers, host filesystem mounts. Basically root on the host.
+                </p>
+                <h3 className="text-xl font-bold mb-4">What the broker does</h3>
+                <p className="text-[var(--text-secondary)]">
+                  Instead of the real socket, the container gets a broker socket. The broker intercepts every Docker API call, checks it against an endpoint allowlist (65 endpoints, default-deny), and inspects <code>POST /containers/create</code> bodies for dangerous configurations. If it doesn't pass, it doesn't reach the daemon.
+                </p>
+              </div>
+              <div className="flex-1">
+                <div className="code-block">
+                  <div className="text-[var(--text-secondary)] mb-2"># Quick setup</div>
+                  <div className="text-green-400 mb-1">$ copilot_here --enable-docker-broker</div>
+                  <div className="text-[var(--text-secondary)] mb-3 text-xs">Creates .copilot_here/docker-broker.json</div>
+                  <div className="text-green-400 mb-1">$ copilot_here --add-docker-broker-image 'mcr.microsoft.com/mssql/server:*'</div>
+                  <div className="text-green-400 mb-1">$ copilot_here --add-docker-broker-image 'postgres:16*'</div>
+                  <div className="text-green-400 mb-1">$ copilot_here --add-docker-broker-image 'testcontainers/ryuk:*'</div>
+                  <div className="text-[var(--text-secondary)] mb-3 text-xs">Allowlist images the agent can spawn</div>
+                  <div className="text-green-400">$ copilot_here --dind --dotnet -p "run integration tests"</div>
+                  <div className="text-[var(--text-secondary)] text-xs mt-1">Or omit --dind if broker is enabled in config</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Standard vs Airlock mode */}
+            <h3 className="text-2xl font-bold text-center mb-8">Standard vs Airlock mode</h3>
+            <div className="grid md:grid-cols-2 gap-8 mb-16">
+              <div className="card">
+                <div className="w-12 h-12 rounded-lg bg-[var(--bg-tertiary)] flex items-center justify-center mb-4 text-blue-400">
+                  <Box size={24} />
+                </div>
+                <h4 className="text-lg font-bold mb-2">Standard mode</h4>
+                <p className="text-[var(--text-secondary)]">
+                  Broker listens on a Unix socket (Linux/macOS) or TCP (Windows). The socket is mounted into the container. <code>DOCKER_HOST</code> points at the broker. The container can reach the internet normally. Only Docker API calls are mediated.
+                </p>
+              </div>
+              <div className="card">
+                <div className="w-12 h-12 rounded-lg bg-[var(--bg-tertiary)] flex items-center justify-center mb-4 text-purple-400">
+                  <Lock size={24} />
+                </div>
+                <h4 className="text-lg font-bold mb-2">Airlock mode</h4>
+                <p className="text-[var(--text-secondary)] mb-3">
+                  Adds a proxy container. App container sits on an internal-only network with no direct internet access. Docker API calls go through a <code>socat</code> bridge to the host broker. Sibling containers spawned by the agent are auto-joined to the airlock network, keeping them isolated too.
+                </p>
+                <p className="text-[var(--text-secondary)] text-sm">
+                  <strong className="text-yellow-400">Known limitation:</strong> Testcontainers and similar frameworks that connect to siblings via host-mapped ports won't work in airlock mode yet (<ExternalLink href="https://github.com/GordonBeeming/copilot_here/issues/101" className="text-[var(--accent-secondary)] hover:underline">#101</ExternalLink>). Use standard mode with <code>--dind</code> as a workaround — the broker still enforces all API rules.
+                </p>
+              </div>
+            </div>
+
+            {/* Security comparison table */}
+            <h3 className="text-2xl font-bold text-center mb-8">Raw socket vs brokered socket</h3>
+            <div className="max-w-4xl mx-auto mb-16">
+              <div className="bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-lg overflow-hidden">
+                <table className="w-full">
+                  <thead className="bg-[var(--bg-primary)] border-b border-[var(--border-color)]">
+                    <tr>
+                      <th className="px-6 py-3 text-left">Capability</th>
+                      <th className="px-6 py-3 text-center">Raw socket mount</th>
+                      <th className="px-6 py-3 text-center">Brokered socket</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-[var(--border-color)]">
+                    <tr>
+                      <td className="px-6 py-4">Endpoint filtering (default-deny)</td>
+                      <td className="px-6 py-4 text-center"><X className="inline-block w-5 h-5 text-red-500" /></td>
+                      <td className="px-6 py-4 text-center"><Check className="inline-block w-5 h-5 text-green-500" /></td>
+                    </tr>
+                    <tr>
+                      <td className="px-6 py-4">Image allowlist (empty = no spawns)</td>
+                      <td className="px-6 py-4 text-center"><X className="inline-block w-5 h-5 text-red-500" /></td>
+                      <td className="px-6 py-4 text-center"><Check className="inline-block w-5 h-5 text-green-500" /></td>
+                    </tr>
+                    <tr>
+                      <td className="px-6 py-4">Privilege blocking</td>
+                      <td className="px-6 py-4 text-center"><X className="inline-block w-5 h-5 text-red-500" /></td>
+                      <td className="px-6 py-4 text-center"><Check className="inline-block w-5 h-5 text-green-500" /></td>
+                    </tr>
+                    <tr>
+                      <td className="px-6 py-4">Host namespace blocking</td>
+                      <td className="px-6 py-4 text-center"><X className="inline-block w-5 h-5 text-red-500" /></td>
+                      <td className="px-6 py-4 text-center"><Check className="inline-block w-5 h-5 text-green-500" /></td>
+                    </tr>
+                    <tr>
+                      <td className="px-6 py-4">Forbidden bind mount blocking</td>
+                      <td className="px-6 py-4 text-center"><X className="inline-block w-5 h-5 text-red-500" /></td>
+                      <td className="px-6 py-4 text-center"><Check className="inline-block w-5 h-5 text-green-500" /></td>
+                    </tr>
+                    <tr>
+                      <td className="px-6 py-4">Dangerous capability blocking</td>
+                      <td className="px-6 py-4 text-center"><X className="inline-block w-5 h-5 text-red-500" /></td>
+                      <td className="px-6 py-4 text-center"><Check className="inline-block w-5 h-5 text-green-500" /></td>
+                    </tr>
+                    <tr>
+                      <td className="px-6 py-4">Network isolation (with Airlock)</td>
+                      <td className="px-6 py-4 text-center"><X className="inline-block w-5 h-5 text-red-500" /></td>
+                      <td className="px-6 py-4 text-center"><Check className="inline-block w-5 h-5 text-green-500" /></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* Remaining attack surface */}
+            <div className="max-w-4xl mx-auto mb-12">
+              <div className="card border-yellow-500/30">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-yellow-500/10 flex items-center justify-center text-yellow-400">
+                    <AlertTriangle size={20} />
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-bold mb-3">What's still exposed</h4>
+                    <ul className="space-y-2 text-[var(--text-secondary)]">
+                      <li><strong>Exec into siblings</strong> — <code>POST /containers/*/exec</code> is allowed with no body inspection. An agent could exec commands in running sibling containers.</li>
+                      <li><strong>Docker build</strong> — <code>POST /build</code> is allowed. A Dockerfile's <code>RUN</code> commands execute on the host daemon during build.</li>
+                      <li><strong>Archive write</strong> — <code>PUT /containers/*/archive</code> lets files be written into running containers.</li>
+                      <li><strong>Tag trust</strong> — <code>postgres:*</code> trusts every tag in that repo. A compromised upstream tag would pass the allowlist. Use specific versions where possible.</li>
+                    </ul>
+                    <p className="text-[var(--text-secondary)] mt-3 text-sm">
+                      These vectors require the agent to actively try to escape. The broker catches the common accidental cases. For maximum lockdown, combine with Airlock mode.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Blog post links */}
+            <div className="text-center">
+              <div className="flex flex-wrap justify-center gap-4">
+                <ExternalLink href="https://gordonbeeming.com/blog/2026-04-09/how-copilot-here-brokers-docker-in-docker-safely" className="btn btn-secondary inline-flex items-center gap-2">
+                  <Shield size={18} />
+                  How it works (deep dive)
+                </ExternalLink>
+                <ExternalLink href="https://gordonbeeming.com/blog/2026-04-09/setting-up-docker-in-docker-in-copilot-here" className="btn btn-secondary inline-flex items-center gap-2">
+                  <Settings size={18} />
+                  Setup guide
+                </ExternalLink>
+              </div>
+            </div>
           </div>
         </section>
 
