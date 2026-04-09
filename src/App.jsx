@@ -610,38 +610,38 @@ function App() {
                   <tbody className="divide-y divide-[var(--border-color)]">
                     <tr>
                       <td className="px-6 py-4">Endpoint filtering (default-deny)</td>
-                      <td className="px-6 py-4 text-center"><X className="inline-block w-5 h-5 text-red-500" /></td>
-                      <td className="px-6 py-4 text-center"><Check className="inline-block w-5 h-5 text-green-500" /></td>
+                      <td className="px-6 py-4 text-center"><span className="sr-only">No</span><X aria-hidden="true" className="inline-block w-5 h-5 text-red-500" /></td>
+                      <td className="px-6 py-4 text-center"><span className="sr-only">Yes</span><Check aria-hidden="true" className="inline-block w-5 h-5 text-green-500" /></td>
                     </tr>
                     <tr>
                       <td className="px-6 py-4">Image allowlist (empty = no spawns)</td>
-                      <td className="px-6 py-4 text-center"><X className="inline-block w-5 h-5 text-red-500" /></td>
-                      <td className="px-6 py-4 text-center"><Check className="inline-block w-5 h-5 text-green-500" /></td>
+                      <td className="px-6 py-4 text-center"><span className="sr-only">No</span><X aria-hidden="true" className="inline-block w-5 h-5 text-red-500" /></td>
+                      <td className="px-6 py-4 text-center"><span className="sr-only">Yes</span><Check aria-hidden="true" className="inline-block w-5 h-5 text-green-500" /></td>
                     </tr>
                     <tr>
                       <td className="px-6 py-4">Privilege blocking</td>
-                      <td className="px-6 py-4 text-center"><X className="inline-block w-5 h-5 text-red-500" /></td>
-                      <td className="px-6 py-4 text-center"><Check className="inline-block w-5 h-5 text-green-500" /></td>
+                      <td className="px-6 py-4 text-center"><span className="sr-only">No</span><X aria-hidden="true" className="inline-block w-5 h-5 text-red-500" /></td>
+                      <td className="px-6 py-4 text-center"><span className="sr-only">Yes</span><Check aria-hidden="true" className="inline-block w-5 h-5 text-green-500" /></td>
                     </tr>
                     <tr>
                       <td className="px-6 py-4">Host namespace blocking</td>
-                      <td className="px-6 py-4 text-center"><X className="inline-block w-5 h-5 text-red-500" /></td>
-                      <td className="px-6 py-4 text-center"><Check className="inline-block w-5 h-5 text-green-500" /></td>
+                      <td className="px-6 py-4 text-center"><span className="sr-only">No</span><X aria-hidden="true" className="inline-block w-5 h-5 text-red-500" /></td>
+                      <td className="px-6 py-4 text-center"><span className="sr-only">Yes</span><Check aria-hidden="true" className="inline-block w-5 h-5 text-green-500" /></td>
                     </tr>
                     <tr>
                       <td className="px-6 py-4">Forbidden bind mount blocking</td>
-                      <td className="px-6 py-4 text-center"><X className="inline-block w-5 h-5 text-red-500" /></td>
-                      <td className="px-6 py-4 text-center"><Check className="inline-block w-5 h-5 text-green-500" /></td>
+                      <td className="px-6 py-4 text-center"><span className="sr-only">No</span><X aria-hidden="true" className="inline-block w-5 h-5 text-red-500" /></td>
+                      <td className="px-6 py-4 text-center"><span className="sr-only">Yes</span><Check aria-hidden="true" className="inline-block w-5 h-5 text-green-500" /></td>
                     </tr>
                     <tr>
                       <td className="px-6 py-4">Dangerous capability blocking</td>
-                      <td className="px-6 py-4 text-center"><X className="inline-block w-5 h-5 text-red-500" /></td>
-                      <td className="px-6 py-4 text-center"><Check className="inline-block w-5 h-5 text-green-500" /></td>
+                      <td className="px-6 py-4 text-center"><span className="sr-only">No</span><X aria-hidden="true" className="inline-block w-5 h-5 text-red-500" /></td>
+                      <td className="px-6 py-4 text-center"><span className="sr-only">Yes</span><Check aria-hidden="true" className="inline-block w-5 h-5 text-green-500" /></td>
                     </tr>
                     <tr>
                       <td className="px-6 py-4">Network isolation (with Airlock)</td>
-                      <td className="px-6 py-4 text-center"><X className="inline-block w-5 h-5 text-red-500" /></td>
-                      <td className="px-6 py-4 text-center"><Check className="inline-block w-5 h-5 text-green-500" /></td>
+                      <td className="px-6 py-4 text-center"><span className="sr-only">No</span><X aria-hidden="true" className="inline-block w-5 h-5 text-red-500" /></td>
+                      <td className="px-6 py-4 text-center"><span className="sr-only">Yes</span><Check aria-hidden="true" className="inline-block w-5 h-5 text-green-500" /></td>
                     </tr>
                   </tbody>
                 </table>
