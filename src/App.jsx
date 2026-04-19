@@ -709,7 +709,7 @@ function App() {
                   <table className="w-full text-sm">
                     <thead className="bg-[var(--bg-primary)] border-b border-[var(--border-color)]">
                       <tr>
-                        <th className="px-6 py-3 text-left whitespace-nowrap"></th>
+                        <th className="px-6 py-3 text-left whitespace-nowrap">Feature</th>
                         <th className="px-6 py-3 text-left">copilot_here</th>
                         <th className="px-6 py-3 text-left">Docker Sandboxes (sbx)</th>
                       </tr>
