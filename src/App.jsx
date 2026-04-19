@@ -687,6 +687,140 @@ function App() {
           </div>
         </section>
 
+        {/* copilot_here vs Docker Sandboxes */}
+        <section id="compare-sbx" className="bg-[var(--bg-primary)] border-b border-[var(--border-color)]">
+          <div className="container">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold mb-4">copilot_here vs Docker Sandboxes</h2>
+              <p className="text-[var(--text-secondary)] max-w-2xl mx-auto">
+                A fair question once you've seen <ExternalLink href="https://docs.docker.com/ai/sandboxes/" className="text-[var(--accent-secondary)] hover:underline">Docker Sandboxes (<code>sbx</code>)</ExternalLink>: which one do I actually pick? Both are good, they're tuned for different situations, and they can coexist on the same machine.
+              </p>
+            </div>
+
+            {/* Facts */}
+            <div className="max-w-5xl mx-auto mb-12">
+              <div className="text-center mb-6">
+                <span className="inline-block bg-[var(--bg-tertiary)] text-[var(--accent-secondary)] text-sm font-medium px-3 py-1 rounded-full border border-[var(--border-color)]">
+                  📋 The facts
+                </span>
+              </div>
+              <div className="bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-lg overflow-hidden">
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead className="bg-[var(--bg-primary)] border-b border-[var(--border-color)]">
+                      <tr>
+                        <th className="px-6 py-3 text-left whitespace-nowrap">Feature</th>
+                        <th className="px-6 py-3 text-left">copilot_here</th>
+                        <th className="px-6 py-3 text-left">Docker Sandboxes (sbx)</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-[var(--border-color)]">
+                      <tr>
+                        <td className="px-6 py-4 font-medium whitespace-nowrap">Isolation model</td>
+                        <td className="px-6 py-4 text-[var(--text-secondary)]">Container on your existing runtime (shared kernel)</td>
+                        <td className="px-6 py-4 text-[var(--text-secondary)]">microVM per sandbox (its own kernel)</td>
+                      </tr>
+                      <tr>
+                        <td className="px-6 py-4 font-medium whitespace-nowrap">Container runtime</td>
+                        <td className="px-6 py-4 text-[var(--text-secondary)]">Docker, OrbStack, Podman (rootless and rootful), auto-detected</td>
+                        <td className="px-6 py-4 text-[var(--text-secondary)]">Docker-authored CLI, ships with its own microVM stack</td>
+                      </tr>
+                      <tr>
+                        <td className="px-6 py-4 font-medium whitespace-nowrap">Workspace mount</td>
+                        <td className="px-6 py-4 text-[var(--text-secondary)]">Project dir read/write. Extra folders via <code>--mount</code> are read-only by default, <code>--mount-rw</code> to opt in</td>
+                        <td className="px-6 py-4 text-[var(--text-secondary)]">Workspace read/write. <code>--branch</code> puts each agent in its own git worktree under <code>.sbx/</code></td>
+                      </tr>
+                      <tr>
+                        <td className="px-6 py-4 font-medium whitespace-nowrap">Network egress</td>
+                        <td className="px-6 py-4 text-[var(--text-secondary)]">Opt-in Airlock: HTTPS-intercepting proxy, strict exact-host + path allowlist, Copilot-shaped defaults</td>
+                        <td className="px-6 py-4 text-[var(--text-secondary)]">On by default: HTTP/HTTPS proxy with a domain allowlist. TCP/UDP/ICMP blocked</td>
+                      </tr>
+                      <tr>
+                        <td className="px-6 py-4 font-medium whitespace-nowrap">Nested Docker</td>
+                        <td className="px-6 py-4 text-[var(--text-secondary)]">Opt-in brokered socket (<code>--dind</code>): image allowlist, endpoint allowlist, body inspection</td>
+                        <td className="px-6 py-4 text-[var(--text-secondary)]">Each sandbox has its own isolated Docker engine built in</td>
+                      </tr>
+                      <tr>
+                        <td className="px-6 py-4 font-medium whitespace-nowrap">Secrets</td>
+                        <td className="px-6 py-4 text-[var(--text-secondary)]">Reuses the host <code>gh</code> CLI credentials per run</td>
+                        <td className="px-6 py-4 text-[var(--text-secondary)]"><code>sbx secret set</code>; proxy injects headers so values never enter the VM</td>
+                      </tr>
+                      <tr>
+                        <td className="px-6 py-4 font-medium whitespace-nowrap">Persistence</td>
+                        <td className="px-6 py-4 text-[var(--text-secondary)]">Ephemeral container. Persisted <em>config</em> in <code>.copilot_here/</code> and <code>~/.config/copilot_here/</code></td>
+                        <td className="px-6 py-4 text-[var(--text-secondary)]">Sandboxes persist across runs. Installed packages, images, and history survive restarts</td>
+                      </tr>
+                      <tr>
+                        <td className="px-6 py-4 font-medium whitespace-nowrap">Agents today</td>
+                        <td className="px-6 py-4 text-[var(--text-secondary)]">GitHub Copilot CLI. Multi-tool scaffolding is in-tree, more agents on the roadmap</td>
+                        <td className="px-6 py-4 text-[var(--text-secondary)]">claude, codex, copilot, gemini, kiro, opencode, shell, docker-agent</td>
+                      </tr>
+                      <tr>
+                        <td className="px-6 py-4 font-medium whitespace-nowrap">Platforms</td>
+                        <td className="px-6 py-4 text-[var(--text-secondary)]">macOS, Linux, Windows (PowerShell 5.1 and 7+)</td>
+                        <td className="px-6 py-4 text-[var(--text-secondary)]">macOS, Linux, Windows</td>
+                      </tr>
+                      <tr>
+                        <td className="px-6 py-4 font-medium whitespace-nowrap">Status</td>
+                        <td className="px-6 py-4 text-[var(--text-secondary)]">Open source, .NET 10 Native AOT</td>
+                        <td className="px-6 py-4 text-[var(--text-secondary)]">Docker-maintained, experimental</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            {/* When to pick which */}
+            <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-16">
+              <div className="card">
+                <h3 className="text-xl font-bold mb-4">Pick Docker Sandboxes when</h3>
+                <ul className="space-y-3 text-[var(--text-secondary)]">
+                  <li>You bounce between Claude, Codex, Gemini and friends today and want one sandbox tool that already supports all of them.</li>
+                  <li>You want microVM isolation (separate kernel) rather than container isolation.</li>
+                  <li>You want long-lived, named sandboxes and parallel agents on the same repo via branch mode.</li>
+                  <li>You want nested Docker inside the sandbox with no extra configuration.</li>
+                </ul>
+              </div>
+              <div className="card">
+                <h3 className="text-xl font-bold mb-4">Pick copilot_here when</h3>
+                <ul className="space-y-3 text-[var(--text-secondary)]">
+                  <li>You're focused on the GitHub Copilot CLI today and want tight, Copilot-shaped default network rules rather than broad wildcards.</li>
+                  <li>You want a small, auditable, open-source sandbox you can fork and tighten further.</li>
+                  <li>You want ephemeral, per-run containers that reuse the host <code>gh</code> auth instead of long-lived sandbox state.</li>
+                  <li>You want explicit per-folder opt-in for anything beyond the project dir. Extra mounts default to read-only unless you pass <code>--mount-rw</code>.</li>
+                  <li>Your container runtime is Podman, rootless Podman, or OrbStack, and you'd rather not install a Docker-authored CLI. copilot_here auto-detects all three and <code>--set-runtime</code> pins your choice.</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* ELI5 */}
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-6">
+                <span className="inline-block bg-[var(--bg-tertiary)] text-[var(--accent-secondary)] text-sm font-medium px-3 py-1 rounded-full border border-[var(--border-color)]">
+                  🧒 Explain it like I'm in 5th grade
+                </span>
+              </div>
+              <div className="card">
+                <p className="text-[var(--text-secondary)] mb-4">
+                  Docker Sandboxes (<code>sbx</code>) is like renting each AI agent its own tiny apartment. Own front door. Own kitchen. Own phone line. If the agent makes a mess, the mess stays in the apartment. It's great when you hire a bunch of different AI agents and you want strong walls around every one of them.
+                </p>
+                <p className="text-[var(--text-secondary)] mb-4">
+                  <code>copilot_here</code> is like giving the agent a locked room <em>inside</em> your house. The walls are not as thick, but the door is bolted, it can only touch the one drawer you unlocked (your project folder), and there is a bouncer at the front door checking every phone call (the Airlock). It is small, fast to start, and easy to read the source code of.
+                </p>
+                <p className="text-[var(--text-secondary)] mb-3"><strong className="text-[var(--text-primary)]">The everyday version of "when do I pick which?":</strong></p>
+                <ul className="space-y-2 text-[var(--text-secondary)]">
+                  <li>Pick <strong className="text-[var(--text-primary)]">Docker Sandboxes</strong> when you use lots of different AI agents and you want the strongest walls.</li>
+                  <li>Pick <strong className="text-[var(--text-primary)]">copilot_here</strong> when you are mostly using the GitHub Copilot CLI, you want a small inspectable sandbox that reuses your existing GitHub login, and you want strict, Copilot-shaped network rules by default. It is also an easy choice if your container runtime is already Podman or OrbStack rather than Docker.</li>
+                </ul>
+                <p className="text-[var(--text-secondary)] text-sm mt-4">
+                  Both can live on the same machine. Use whichever fits the job.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Supported Systems */}
         <section className="bg-[var(--bg-secondary)] border-b border-[var(--border-color)]">
           <div className="container text-center">
